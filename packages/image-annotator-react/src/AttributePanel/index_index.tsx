@@ -36,7 +36,7 @@ const Wrapper = styled.div<{ collapsed: boolean }>`
   flex-direction: column;
   border-left: 1px solid rgba(235, 236, 240, 1);
 
-  ${({ collapsed }) => (collapsed ? 'width: 0;' : 'width: 230px;')}
+  ${({ collapsed }) => (collapsed ? 'width: 0;' : 'width: 280px;')}
 `;
 
 const AttributeHeaderItem = styled.div<{ active: boolean }>`
@@ -174,7 +174,7 @@ function ClearAction({ onClear }: { onClear: () => void }) {
     >
       <Footer onClick={() => setOpen((pre) => !pre)}>
         <DeleteIcon />
-        &nbsp; 重置
+        &nbsp; {t('clear')}
       </Footer>
     </Tooltip>
   );
@@ -434,7 +434,6 @@ export function AttributePanel() {
         <CollapseWrapper defaultActiveKey={defaultActiveKeys} items={collapseItems} />
       </Content>
       <ClearAction onClear={handleClear} />
-      <Button>标注完成</Button>
     </Wrapper>
   );
 }

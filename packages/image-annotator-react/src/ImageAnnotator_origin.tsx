@@ -21,7 +21,8 @@ import type {
 import cloneDeep from 'lodash.clonedeep';
 
 import Sidebar from './Sidebar';
-import { openAttributeModal } from './LabelSection';
+import { AnnotatorToolbar } from './Toolbar';
+import { LabelSection, openAttributeModal } from './LabelSection';
 import { AttributePanel } from './AttributePanel';
 import type { ImageAnnotatorOptions } from './hooks/useImageAnnotator';
 import { useImageAnnotator } from './hooks/useImageAnnotator';
@@ -167,8 +168,8 @@ function ForwardAnnotator(
     editingSample,
     maxHistoryCount = 20,
     primaryColor = '#007aff',
-    toolbarExtra: _toolbarExtra,
-    toolbarRight: _toolbarRight,
+    toolbarExtra,
+    toolbarRight,
     preAnnotationLabels,
     preAnnotations,
     requestEdit,
@@ -922,7 +923,8 @@ function ForwardAnnotator(
           <HistoryContext.Provider value={historyContextValue}>
             {/* @ts-ignore */}
             <Wrapper style={{ '--color-primary': primaryColor, '--offset-top': `${offsetTop}px` }}>
-              {/* <AnnotatorToolbar extra={toolbarExtra} right={toolbarRight} /> */}
+              <AnnotatorToolbar extra={toolbarExtra} right={toolbarRight} />
+              <LabelSection />
               <Content>
                 <Sidebar renderSidebar={renderSidebar} />
                 <ContentMid>

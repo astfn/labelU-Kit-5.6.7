@@ -1,31 +1,31 @@
 import styled from 'styled-components';
-import { useTranslation } from '@labelu/i18n';
 
 import { useTool } from '@/context/tool.context';
 
-import { ReactComponent as ScaleResetIcon } from './assets/scale-reset.svg';
-import { ReactComponent as FitContainerIcon } from './assets/fit-container.svg';
+import { ReactComponent as AmplifyIcon } from './assets/amplify-icon.svg';
+import { ReactComponent as ReduceIcon } from './assets/reduce-icon.svg';
 import { ReactComponent as ARotateIcon } from './assets/a-rotate-icon.svg';
 import { ReactComponent as CRotateIcon } from './assets/c-rotate-icon.svg';
 import { useRotateHotkeys } from './useRotateHotkeys';
 
 const FooterBar = styled.div`
-  height: 36px;
+  padding-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid rgba(235, 236, 240, 1);
-  padding: 0 16px;
-  font-size: 14px;
   user-select: none;
+  background-color: #f0f0f0;
 
   .labelu-svg-icon {
     font-size: 1.25rem;
-    color: #666;
+    color: #333333;
   }
 `;
 
 const Right = styled.div`
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.15);
   display: flex;
   gap: 1rem;
 `;
@@ -46,23 +46,26 @@ const BarItem = styled.div`
 `;
 
 export default function Footer() {
-  const { engine } = useTool();
+  const { engine, config } = useTool();
   // @ts-ignore
-  const { t } = useTranslation();
 
   const { handleRotate } = useRotateHotkeys({ engine });
   return (
-    <FooterBar>
+    <FooterBar style={{ backgroundColor: config?.backgroundColor || 'unset' }}>
       <Right>
         <BarItem onClick={() => handleRotate(true)}>
           <ARotateIcon className="labelu-svg-icon" />
-          {t('rotate')}
         </BarItem>
         <BarItem onClick={() => handleRotate(false)}>
           <CRotateIcon className="labelu-svg-icon" />
-          {t('rotate')}
         </BarItem>
-        <BarItem
+        <BarItem onClick={() => engine.rotateAccording2Multiples(1.2)}>
+          <AmplifyIcon />
+        </BarItem>
+        <BarItem onClick={() => engine.rotateAccording2Multiples(0.8)}>
+          <ReduceIcon />
+        </BarItem>
+        {/* <BarItem
           onClick={() => {
             engine?.fit();
           }}
@@ -77,7 +80,7 @@ export default function Footer() {
         >
           <ScaleResetIcon className="labelu-svg-icon" />
           {t('rawScale')}
-        </BarItem>
+        </BarItem> */}
       </Right>
     </FooterBar>
   );
