@@ -265,6 +265,39 @@ export class Axis {
     eventEmitter.emit(EInternalEvent.AxisChange, e);
   };
 
+  /**
+   * 传入缩放倍数(基于当前已经缩放的倍数再次缩放)
+   */
+  public rotateAccording2Multiples(multiple: number) {
+    if (multiple <= 0) {
+      console.warn('Multiple must be greater than 0');
+      return;
+    }
+
+    const currentScale = this._scale;
+    const newScale = currentScale * multiple;
+
+    if (newScale < Axis.MIN_SCALE || newScale > Axis.MAX_SCALE) {
+      console.warn('New scale is out of bounds');
+      return;
+    }
+
+    const point = this._scaleCenter;
+
+    // 画布坐标原点距离画布左上角的新的偏移量
+    const newX = point.x - (point.x - this._x) * multiple;
+    const newY = point.y - (point.y - this._y) * multiple;
+
+    this._x = newX;
+    this._y = newY;
+    this._scale = newScale;
+
+    this._ticker?.requestUpdate();
+
+    eventEmitter.emit(EInternalEvent.Zoom, new Event('rotateAccording2Multiples'));
+    eventEmitter.emit(EInternalEvent.AxisChange, new Event('rotateAccording2Multiples'));
+  }
+
   public resetOffset() {
     this._distanceX = 0;
     this._distanceY = 0;

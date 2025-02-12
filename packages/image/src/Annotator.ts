@@ -99,6 +99,17 @@ export class Annotator extends AnnotatorBase {
   }
 
   /**
+   * 传入缩放倍数(基于当前已经缩放的倍数再次缩放)
+   */
+  public rotateAccording2Multiples(multiple: number) {
+    if (!axis) {
+      throw new Error('axis is not initialized');
+    }
+
+    axis.rotateAccording2Multiples(multiple);
+  }
+
+  /**
    * 居中显示
    */
   public center() {
