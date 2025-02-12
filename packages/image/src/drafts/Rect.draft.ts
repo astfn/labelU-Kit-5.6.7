@@ -14,7 +14,7 @@ import { Annotation } from '../annotations/Annotation';
 import { ControllerPoint } from './ControllerPoint';
 import { Draft } from './Draft';
 import { ControllerEdge } from './ControllerEdge';
-import type { RectToolOptions } from '../tools';
+import type { RectTool, RectToolOptions } from '../tools';
 
 type ControllerPosition = 'nw' | 'ne' | 'se' | 'sw';
 
@@ -31,12 +31,16 @@ export class DraftRect extends Draft<RectData, ControllerEdge | Point | Rect, Re
 
   private _edgePositionMapping: Map<EdgePosition, ControllerEdge> = new Map();
 
-  constructor(config: RectToolOptions, params: AnnotationParams<RectData, RectStyle>) {
+  private toolCtx: RectTool;
+
+  constructor(config: RectToolOptions, params: AnnotationParams<RectData, RectStyle> & { toolCtx: RectTool }) {
     super({ ...params, name: 'rect', labelColor: AnnotationRect.labelStatic.getLabelColor(params.data.label) });
 
     this.config = config;
+    this.toolCtx = params.toolCtx;
 
     this._setupShapes();
+    this.onMove(this._onMove);
     this.onMouseUp(this._onMouseUp);
     this.finishSetup();
   }
@@ -188,6 +192,8 @@ export class DraftRect extends Draft<RectData, ControllerEdge | Point | Rect, Re
   }
 
   // ========================== 选中的标注草稿 ==========================
+  // 处理草稿移动逻辑
+  private _onMove = () => {};
 
   private _onMouseUp = () => {
     // 手动将坐标同步到数据
@@ -657,7 +663,7 @@ export class DraftRect extends Draft<RectData, ControllerEdge | Point | Rect, Re
   }
 
   public syncCoordToData() {
-    const { data } = this;
+    const { data, toolCtx } = this;
 
     const bbox = this._getBBox();
 
@@ -665,6 +671,11 @@ export class DraftRect extends Draft<RectData, ControllerEdge | Point | Rect, Re
     data.y = axis!.getOriginalY(bbox.minY);
     data.width = axis!.getOriginalX(bbox.maxX) - data.x;
     data.height = axis!.getOriginalY(bbox.maxY) - data.y;
+
+    if (toolCtx.checkCollision(data)) {
+      // console.log('同步数据 发生碰撞', this.toolCtx);
+      this.toolCtx.handleDelete();
+    }
   }
 
   public isRectAndControllersUnderCursor(mouseCoord: AxisPoint) {
