@@ -85,8 +85,16 @@ export default [
     key: 'actions',
     hotkeys: [
       {
-        name: i18n.t('rotate'),
+        name: '顺时针旋转',
         content: <Kbd>R</Kbd>,
+      },
+      {
+        name: '逆时针旋转',
+        content: (
+          <>
+            <Kbd>A</Kbd> + <Kbd>R</Kbd>
+          </>
+        ),
       },
       {
         name: i18n.t('moveCanvas'),
