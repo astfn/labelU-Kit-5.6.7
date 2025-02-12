@@ -33,6 +33,11 @@ export interface AnnotatorOptions {
 
   height: number;
 
+  /**
+   * 画布背景色
+   */
+  backgroundColor?: string;
+
   line?: LineToolOptions;
 
   point?: PointToolOptions;
@@ -138,7 +143,7 @@ export class AnnotatorBase {
   }
 
   private _initialContainer() {
-    const { container, width, height, image } = this.config;
+    const { container, width, height, image, backgroundColor } = this.config;
 
     container.style.width = `${width}px`;
     container.style.height = `${height}px`;
@@ -153,6 +158,7 @@ export class AnnotatorBase {
       rotate: image?.rotate,
       zIndex: 1,
     });
+    if (backgroundColor) this.backgroundRenderer.backgroundColor = backgroundColor;
   }
 
   private _initialAxis() {
