@@ -40,6 +40,8 @@ import { HistoryContext } from './context/history.context';
 import type { ImageSample } from './context/sample.context';
 import { SampleContext } from './context/sample.context';
 
+export type TImagePackageAnnotator = typeof ImageAnnotatorClass;
+
 function omit<T, K extends keyof T>(obj: T, ...keys: K[]): Omit<T, K> {
   const result = { ...obj };
   keys.forEach((key) => {
