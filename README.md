@@ -13,9 +13,11 @@
    - rotateAccording2Multiples(multiple: number)
 4. 支持配置画布背景色，并联动底部工具栏样式
    - config.backgroundColor
-5. image-annotator-react 暴露 changeSample api，可在外部自定义更改标注图片的逻辑
-6. 顶部工具栏支持隐藏 hiddenToolbar（条件展示，而非条件渲染）
-   * 之所以使用条件展示，是为了保留一些内置的基础路基，例如快捷键进行操作的回退和取消回退。而且，条件展示也有利于后续在 AnnotatorToolbar 中暴露一些实例方法。
+5. image-annotator-react  api 拓展
+   1. 暴露 changeSample api，可在外部自定义更改标注图片的逻辑
+   2. 顶部工具栏支持隐藏 hiddenToolbar（条件展示，而非条件渲染）
+      * 之所以使用条件展示，是为了保留一些内置的基础路基，例如快捷键进行操作的回退和取消回退。而且，条件展示也有利于后续在 AnnotatorToolbar 中暴露一些实例方法。
+   3. 侧边栏支持隐藏 hiddenSidebar (条件展示)
 
 ### 个性化需求改动
 

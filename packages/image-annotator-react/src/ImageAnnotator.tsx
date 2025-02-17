@@ -130,6 +130,7 @@ export interface ImageAnnotatorProps {
     Record<ToolName | TextAnnotationType | TagAnnotationType, AnnotationData[] | GlobalAnnotation[]>
   >;
 
+  hiddenSidebar?: boolean;
   renderSidebar?: null | (() => React.ReactNode);
   renderAttributes?: () => React.ReactNode;
   editingSample?: ImageSample;
@@ -169,6 +170,7 @@ export interface ImageAnnotatorProps {
 function ForwardAnnotator(
   {
     samples: propsSamples,
+    hiddenSidebar = false,
     renderSidebar,
     config,
     renderAttributes,
@@ -938,7 +940,7 @@ function ForwardAnnotator(
                 <AnnotatorToolbar hidden={hiddenToolbar} extra={toolbarExtra} right={toolbarRight} />
               </div>
               <Content>
-                <Sidebar renderSidebar={renderSidebar} />
+                <Sidebar hidden={hiddenSidebar} renderSidebar={renderSidebar} />
                 <ContentMid>
                   <AnnotationContainer ref={containerRef} />
                   <Footer />

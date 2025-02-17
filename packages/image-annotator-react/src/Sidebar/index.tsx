@@ -14,9 +14,10 @@ const Cards = styled.div`
   overflow: auto;
 `;
 
-const Wrapper = styled.div.attrs((props: { collapsed: boolean }) => ({
+const Wrapper = styled.div.attrs((props: { collapsed: boolean; hidden?: boolean }) => ({
   ...props,
   className: 'labelu-image__sidebar',
+  display: props.hidden ? 'none' : undefined,
 }))`
   position: relative;
   flex-shrink: 0;
@@ -89,9 +90,10 @@ const CollapseTrigger = styled.div<{ collapsed: boolean }>`
 
 export interface SidebarProps {
   renderSidebar?: null | (() => React.ReactNode);
+  hidden?: boolean;
 }
 
-export default function Sidebar({ renderSidebar }: SidebarProps) {
+export default function Sidebar({ renderSidebar, hidden }: SidebarProps) {
   const { samples, onSampleSelect, currentSample } = useSample();
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -112,7 +114,7 @@ export default function Sidebar({ renderSidebar }: SidebarProps) {
   }
 
   return (
-    <Wrapper collapsed={collapsed}>
+    <Wrapper hidden={hidden} collapsed={collapsed}>
       {sidebar || (
         <Cards>
           {samples.map((sample, index) => {

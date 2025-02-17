@@ -139,7 +139,8 @@ export default function ImagePage() {
         // toolbarRight={toolbarRight}
         // samples={presetSamples}
         primaryColor={'#0d53de'}
-        // hiddenToolbar
+        hiddenToolbar
+        hiddenSidebar
         ref={annotatorRef}
         offsetTop={148}
         editingSample={currentSample}
