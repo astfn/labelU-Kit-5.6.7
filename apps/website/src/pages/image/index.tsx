@@ -1,4 +1,4 @@
-import type { AnnotatorRef } from '@labelu/image-annotator-react';
+import type { AnnotatorRef, ImageSample } from '@labelu/image-annotator-react';
 import { Annotator as ImageAnnotator } from '@labelu/image-annotator-react';
 import type { Annotator } from '@labelu/image';
 import { useCallback, useRef, useState } from 'react';
@@ -20,6 +20,25 @@ const presetSamples = [
       width: 1280,
       height: 800,
       rotate: 0,
+    },
+    data: {
+      line: [],
+      point: [],
+      rect: [],
+      polygon: [],
+      cuboid: [],
+      text: [],
+      tag: [],
+    },
+  },
+  {
+    url: 'https://picsum.photos/300/150',
+    name: 'point',
+    id: 'point',
+    meta: {
+      // width: 1280,
+      // height: 800,
+      rotate: 45,
     },
     data: {
       line: [],
@@ -85,6 +104,21 @@ export default function ImagePage() {
     engine.on('labelChange', updateSampleData);
   }, []);
 
+  const currentSampleIndex = useRef<number>(0);
+
+  const changeSampleApi = async () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(resolve, 1000);
+      // setTimeout(reject, 1000);
+    });
+  };
+  const checkoutSample = async () => {
+    console.log(annotatorRef.current?.getAnnotations());
+    await changeSampleApi();
+    currentSampleIndex.current = currentSampleIndex.current == 0 ? 1 : 0;
+    annotatorRef.current.changeSample(presetSamples[currentSampleIndex.current]);
+  };
+
   return (
     <>
       <button
@@ -94,10 +128,18 @@ export default function ImagePage() {
       >
         get result
       </button>
+      <button
+        onClick={() => {
+          checkoutSample();
+        }}
+      >
+        change sample
+      </button>
       <ImageAnnotator
         // toolbarRight={toolbarRight}
+        // samples={presetSamples}
         primaryColor={'#0d53de'}
-        samples={presetSamples}
+        // hiddenToolbar
         ref={annotatorRef}
         offsetTop={148}
         editingSample={currentSample}

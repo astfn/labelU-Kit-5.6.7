@@ -39,6 +39,7 @@ import { ToolContext } from './context/tool.context';
 import { HistoryContext } from './context/history.context';
 import type { ImageSample } from './context/sample.context';
 import { SampleContext } from './context/sample.context';
+import { AnnotatorToolbar } from './Toolbar';
 
 export type TImagePackageAnnotator = typeof ImageAnnotatorClass;
 
@@ -108,6 +109,10 @@ export interface AnnotatorRef {
   getSample: () => ImageSample | undefined;
 
   getEngine: () => ImageAnnotatorClass | null;
+  /**
+   * 暴露切换标注图的方法
+   */
+  changeSample: (sample: ImageSample) => void;
 }
 
 export interface ImageAnnotatorProps {
@@ -131,6 +136,8 @@ export interface ImageAnnotatorProps {
 
   maxHistoryCount?: number;
   primaryColor?: string;
+
+  hiddenToolbar?: boolean;
   toolbarExtra?: React.ReactNode;
   toolbarRight?: React.ReactNode;
 
@@ -169,8 +176,9 @@ function ForwardAnnotator(
     editingSample,
     maxHistoryCount = 20,
     primaryColor = '#007aff',
-    toolbarExtra: _toolbarExtra,
-    toolbarRight: _toolbarRight,
+    hiddenToolbar = false,
+    toolbarExtra: toolbarExtra,
+    toolbarRight: toolbarRight,
     preAnnotationLabels,
     preAnnotations,
     requestEdit,
@@ -830,8 +838,9 @@ function ForwardAnnotator(
       getSample: () => currentSample,
 
       getEngine: () => engine,
+      changeSample: onSampleSelect,
     }),
-    [annotationsWithGlobal, currentSample, engine],
+    [annotationsWithGlobal, currentSample, engine, onSampleSelect],
   );
 
   const annotationContextValue = useMemo(
@@ -924,7 +933,10 @@ function ForwardAnnotator(
           <HistoryContext.Provider value={historyContextValue}>
             {/* @ts-ignore */}
             <Wrapper style={{ '--color-primary': primaryColor, '--offset-top': `${offsetTop}px` }}>
-              {/* <AnnotatorToolbar extra={toolbarExtra} right={toolbarRight} /> */}
+              {/* hiddenToolbar 的样式本来是写在 ToolbarWrapper 中的，但是打包后，引入到 umimax 项目里面不生效，遂暂时嵌套个盒子实现 hidden */}
+              <div style={{ display: hiddenToolbar ? 'none' : undefined }}>
+                <AnnotatorToolbar hidden={hiddenToolbar} extra={toolbarExtra} right={toolbarRight} />
+              </div>
               <Content>
                 <Sidebar renderSidebar={renderSidebar} />
                 <ContentMid>

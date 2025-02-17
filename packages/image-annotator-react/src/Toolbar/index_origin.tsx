@@ -18,8 +18,7 @@ import { dragModalRef } from '@/LabelSection';
 import ToolStyle from './ToolStyle';
 import hotkeysConst from './hotkeys.const';
 
-const ToolbarWrapper = styled(Toolbar)<{ hidden?: boolean }>`
-  display: ${(props) => (props.hidden ? 'none' : undefined)};
+const ToolbarWrapper = styled(Toolbar)`
   color: rgba(0, 0, 0, 0.6);
 `;
 
@@ -32,7 +31,6 @@ const iconMapping = {
 };
 
 export interface IToolbarInEditorProps {
-  hidden?: boolean;
   extra?: React.ReactNode;
   right?: React.ReactNode;
 }
@@ -49,7 +47,7 @@ const ToolStyleWrapper = styled.div`
   color: #333;
 `;
 
-export function AnnotatorToolbar({ right, hidden }: IToolbarInEditorProps) {
+export function AnnotatorToolbar({ right }: IToolbarInEditorProps) {
   const { engine, currentTool, tools, memorizeToolLabel } = useTool();
   const { onOrderVisibleChange, orderVisible } = useAnnotationCtx();
   const { redo, undo, futureRef, pastRef } = useHistoryCtx();
@@ -84,7 +82,6 @@ export function AnnotatorToolbar({ right, hidden }: IToolbarInEditorProps) {
 
   return (
     <ToolbarWrapper
-      hidden={hidden}
       disableRedo={!futureRef.current?.length}
       disableUndo={!!pastRef.current && pastRef.current.length <= 1}
       onOrderSwitch={onOrderVisibleChange}
