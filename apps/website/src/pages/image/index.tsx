@@ -141,6 +141,18 @@ export default function ImagePage() {
         primaryColor={'#0d53de'}
         hiddenToolbar
         hiddenSidebar
+        attributePanelFooterRender={({ handleClear }) => (
+          <>
+            <button
+              onClick={() => {
+                handleClear();
+              }}
+            >
+              clear
+            </button>
+            <button>标注完成</button>
+          </>
+        )}
         ref={annotatorRef}
         offsetTop={148}
         editingSample={currentSample}

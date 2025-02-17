@@ -180,7 +180,11 @@ function ClearAction({ onClear }: { onClear: () => void }) {
   );
 }
 
-export function AttributePanel() {
+export interface IAttributePanelProps {
+  footerRender?: (p: { handleClear: () => void }) => React.ReactNode;
+}
+export function AttributePanel(props: IAttributePanelProps) {
+  const { footerRender } = props;
   const { engine, globalToolConfig, config, labelMapping, preLabelMapping } = useTool();
   const { currentSample } = useSample();
   const {
@@ -433,8 +437,7 @@ export function AttributePanel() {
         <AttributeTree data={flatGlobalAnnotations} config={globals} onChange={handleOnChange} />
         <CollapseWrapper defaultActiveKey={defaultActiveKeys} items={collapseItems} />
       </Content>
-      <ClearAction onClear={handleClear} />
-      <Button>标注完成</Button>
+      {footerRender ? footerRender?.({ handleClear }) : <ClearAction onClear={handleClear} />}
     </Wrapper>
   );
 }

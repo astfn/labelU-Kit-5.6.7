@@ -22,7 +22,7 @@ import cloneDeep from 'lodash.clonedeep';
 
 import Sidebar from './Sidebar';
 import { openAttributeModal } from './LabelSection';
-import { AttributePanel } from './AttributePanel';
+import { AttributePanel, IAttributePanelProps } from './AttributePanel';
 import type { ImageAnnotatorOptions } from './hooks/useImageAnnotator';
 import { useImageAnnotator } from './hooks/useImageAnnotator';
 import Footer from './Footer';
@@ -132,6 +132,7 @@ export interface ImageAnnotatorProps {
 
   hiddenSidebar?: boolean;
   renderSidebar?: null | (() => React.ReactNode);
+  attributePanelFooterRender?: IAttributePanelProps['footerRender'];
   renderAttributes?: () => React.ReactNode;
   editingSample?: ImageSample;
 
@@ -173,6 +174,7 @@ function ForwardAnnotator(
     hiddenSidebar = false,
     renderSidebar,
     config,
+    attributePanelFooterRender,
     renderAttributes,
     offsetTop = 0,
     editingSample,
@@ -925,8 +927,12 @@ function ForwardAnnotator(
   }, [currentSample, onSampleSelect, samples]);
 
   const attributeSide = useMemo(() => {
-    return typeof renderAttributes === 'function' ? renderAttributes() : <AttributePanel />;
-  }, [renderAttributes]);
+    return typeof renderAttributes === 'function' ? (
+      renderAttributes()
+    ) : (
+      <AttributePanel footerRender={attributePanelFooterRender} />
+    );
+  }, [renderAttributes, attributePanelFooterRender]);
 
   return (
     <SampleContext.Provider value={sampleContextValue}>

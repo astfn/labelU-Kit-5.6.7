@@ -18,6 +18,7 @@
    2. 顶部工具栏支持隐藏 hiddenToolbar（条件展示，而非条件渲染）
       * 之所以使用条件展示，是为了保留一些内置的基础路基，例如快捷键进行操作的回退和取消回退。而且，条件展示也有利于后续在 AnnotatorToolbar 中暴露一些实例方法。
    3. 侧边栏支持隐藏 hiddenSidebar (条件展示)
+   4. 支持自定义渲染右侧面板的 footer 部分，并暴露 handleClear 方法 (attributePanelFooterRenderr)。
 
 ### 个性化需求改动
 
