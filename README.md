@@ -27,3 +27,6 @@
 ## 其它
 
 1. 在 image-annotator-react 暴露 Annotator 类型(TImagePackageAnnotator)，方便外部获取 engine 类型
+2. image-annotator-react 暴露操作手册组件（ShortcutKeyOperationManual, ShortcutKeyOperationManualTooltip）
+   * 隐藏源码并没有没有实现的快捷键功能
+   * 隐藏除了 rect 的工具快捷键展示（个人需求）

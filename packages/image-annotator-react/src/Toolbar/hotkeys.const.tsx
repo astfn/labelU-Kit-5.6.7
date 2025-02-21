@@ -10,32 +10,32 @@ export default [
     label: i18n.t('general'),
     key: 'common',
     hotkeys: [
-      {
-        name: i18n.t('save'),
-        content:
-          os === 'MacOS' ? (
-            <>
-              <Kbd>⌘</Kbd> + <Kbd>S</Kbd>
-            </>
-          ) : (
-            <>
-              <Kbd>Ctrl</Kbd> + <Kbd>S</Kbd>
-            </>
-          ),
-      },
-      {
-        name: i18n.t('skip'),
-        content:
-          os === 'MacOS' ? (
-            <>
-              <Kbd>⌘</Kbd> + <Kbd>Space</Kbd>
-            </>
-          ) : (
-            <>
-              <Kbd>Ctrl</Kbd> + <Kbd>Space</Kbd>
-            </>
-          ),
-      },
+      // {
+      //   name: i18n.t('save'),
+      //   content:
+      //     os === 'MacOS' ? (
+      //       <>
+      //         <Kbd>⌘</Kbd> + <Kbd>S</Kbd>
+      //       </>
+      //     ) : (
+      //       <>
+      //         <Kbd>Ctrl</Kbd> + <Kbd>S</Kbd>
+      //       </>
+      //     ),
+      // },
+      // {
+      //   name: i18n.t('skip'),
+      //   content:
+      //     os === 'MacOS' ? (
+      //       <>
+      //         <Kbd>⌘</Kbd> + <Kbd>Space</Kbd>
+      //       </>
+      //     ) : (
+      //       <>
+      //         <Kbd>Ctrl</Kbd> + <Kbd>Space</Kbd>
+      //       </>
+      //     ),
+      // },
       {
         name: i18n.t('undo'),
         content:
@@ -62,22 +62,22 @@ export default [
             </>
           ),
       },
-      {
-        name: i18n.t('prevImage'),
-        content: <Kbd>A</Kbd>,
-      },
-      {
-        name: i18n.t('nextImage'),
-        content: <Kbd>D</Kbd>,
-      },
-      {
-        name: i18n.t('select9'),
-        content: (
-          <>
-            <Kbd>1</Kbd> ~ <Kbd>9</Kbd>
-          </>
-        ),
-      },
+      // {
+      //   name: i18n.t('prevImage'),
+      //   content: <Kbd>A</Kbd>,
+      // },
+      // {
+      //   name: i18n.t('nextImage'),
+      //   content: <Kbd>D</Kbd>,
+      // },
+      // {
+      //   name: i18n.t('select9'),
+      //   content: (
+      //     <>
+      //       <Kbd>1</Kbd> ~ <Kbd>9</Kbd>
+      //     </>
+      //   ),
+      // },
     ],
   },
   {
