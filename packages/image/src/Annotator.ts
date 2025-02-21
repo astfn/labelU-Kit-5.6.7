@@ -30,7 +30,7 @@ export class Annotator extends AnnotatorBase {
     if (data.length > 0) {
       this.emit('error', {
         type: 'rotate',
-        message: `Can't rotate when there are annotations`,
+        message: `有标注时不能旋转!`,
       });
 
       return;

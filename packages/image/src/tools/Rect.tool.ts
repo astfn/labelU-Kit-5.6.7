@@ -175,7 +175,7 @@ export class RectTool extends Tool<RectData, RectStyle, RectToolOptions> {
     if (realWidth < config.minWidth!) {
       Tool.error({
         type: 'minWidth',
-        message: `The width of the rectangle is too small! Minimum width is ${config.minWidth!}!`,
+        message: `矩形宽度太小了, 最小宽度为 ${config.minWidth!} !`,
         value: config.minWidth,
       });
 
@@ -185,7 +185,7 @@ export class RectTool extends Tool<RectData, RectStyle, RectToolOptions> {
     if (realHeight < config.minHeight!) {
       Tool.error({
         type: 'minHeight',
-        message: `The height of the rectangle is too small! Minimum height is ${config.minHeight!}!`,
+        message: `矩形高度太小了, 最小高度为  ${config.minHeight!} !`,
         value: config.minHeight,
       });
 
