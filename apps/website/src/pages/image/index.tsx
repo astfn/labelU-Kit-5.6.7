@@ -1,5 +1,5 @@
 import type { AnnotatorRef, ImageSample } from '@labelu/image-annotator-react';
-import { Annotator as ImageAnnotator } from '@labelu/image-annotator-react';
+import { Annotator as ImageAnnotator, ShortcutKeyOperationManualTooltip } from '@labelu/image-annotator-react';
 import type { Annotator } from '@labelu/image';
 import { useCallback, useRef, useState } from 'react';
 import message from 'antd/es/message';
@@ -135,11 +135,14 @@ export default function ImagePage() {
       >
         change sample
       </button>
+      <ShortcutKeyOperationManualTooltip>
+        <b style={{ textAlign: 'center' }}>操作手册</b>
+      </ShortcutKeyOperationManualTooltip>
       <ImageAnnotator
         // toolbarRight={toolbarRight}
         // samples={presetSamples}
         primaryColor={'#0d53de'}
-        hiddenToolbar
+        // hiddenToolbar
         hiddenSidebar
         attributePanelFooterRender={({ handleClear }) => (
           <>

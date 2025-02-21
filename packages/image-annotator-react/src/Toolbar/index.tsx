@@ -3,7 +3,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import styled from 'styled-components';
 import { useTranslation } from '@labelu/i18n';
 import type { ToolName } from '@labelu/image';
-import { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { ReactComponent as PointIcon } from '@/assets/tools/point.svg';
 import { ReactComponent as LineIcon } from '@/assets/tools/line.svg';
@@ -115,4 +115,21 @@ export function AnnotatorToolbar({ right, hidden }: IToolbarInEditorProps) {
       right={right}
     />
   );
+}
+
+export function ShortcutKeyOperationManualTooltip(p: {
+  children: React.ReactElement;
+  placement?: string;
+  overlayStyle?: React.CSSProperties;
+}) {
+  const { children, placement = 'bottomLeft', overlayStyle = tooltipStyle } = p;
+  return (
+    <Tooltip overlayStyle={overlayStyle} overlay={<HotkeyPanel items={hotkeysConst} />} placement={placement}>
+      {children}
+    </Tooltip>
+  );
+}
+
+export function ShortcutKeyOperationManual() {
+  return <HotkeyPanel items={hotkeysConst} />;
 }

@@ -144,66 +144,6 @@ export default [
     key: 'tools',
     children: [
       {
-        label: i18n.t('plainPoint'),
-        key: 'point',
-        hotkeys: [
-          {
-            name: i18n.t('point'),
-            content: <MouseLeftClick />,
-          },
-          {
-            name: i18n.t('movePoint'),
-            content: (
-              <>
-                {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
-              </>
-            ),
-          },
-        ],
-      },
-      {
-        label: i18n.t('plainLine'),
-        key: 'line',
-        hotkeys: [
-          {
-            name: i18n.t('line'),
-            content: <MouseLeftClick />,
-          },
-          {
-            name: i18n.t('shiftLine'),
-            content: (
-              <>
-                <Kbd>Shift</Kbd> + <MouseLeftClick />
-              </>
-            ),
-          },
-          {
-            name: i18n.t('movePoint'),
-            content: (
-              <>
-                {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
-              </>
-            ),
-          },
-          {
-            name: i18n.t('insertPoint'),
-            content: (
-              <>
-                {i18n.t('edgePress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
-              </>
-            ),
-          },
-          {
-            name: i18n.t('deletePoint'),
-            content: (
-              <>
-                {i18n.t('pointPress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
-              </>
-            ),
-          },
-        ],
-      },
-      {
         label: i18n.t('plainRect'),
         key: 'rect',
         hotkeys: [
@@ -233,90 +173,150 @@ export default [
           },
         ],
       },
-      {
-        label: i18n.t('plainPolygon'),
-        key: 'polygon',
-        hotkeys: [
-          {
-            name: i18n.t('polygon'),
-            content: <MouseLeftClick />,
-          },
-          {
-            name: i18n.t('moveEdge'),
-            content: (
-              <>
-                {i18n.t('selectEdgeAndLongPress')} <MouseLeftClick /> {i18n.t('dragEdge')}
-              </>
-            ),
-          },
-          {
-            name: i18n.t('movePoint'),
-            content: (
-              <>
-                {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
-              </>
-            ),
-          },
-          {
-            name: i18n.t('insertPoint'),
-            content: (
-              <>
-                {i18n.t('edgePress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
-              </>
-            ),
-          },
-          {
-            name: i18n.t('deletePoint'),
-            content: (
-              <>
-                {i18n.t('pointPress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
-              </>
-            ),
-          },
-          {
-            name: i18n.t('cropOverlap'),
-            content: (
-              <>
-                <Kbd>Alt</Kbd> + <Kbd>X</Kbd>
-              </>
-            ),
-          },
-          {
-            name: i18n.t('cancel'),
-            content: <Kbd>Esc</Kbd>,
-          },
-        ],
-      },
-      {
-        label: i18n.t('cuboid'),
-        key: 'cuboid',
-        hotkeys: [
-          {
-            name: i18n.t('makeCuboid'),
-            content: <MouseLeftClick />,
-          },
-          {
-            name: i18n.t('moveEdge'),
-            content: (
-              <>
-                {i18n.t('selectEdgeAndLongPress')} <MouseLeftClick /> {i18n.t('dragEdge')}
-              </>
-            ),
-          },
-          {
-            name: i18n.t('movePoint'),
-            content: (
-              <>
-                {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
-              </>
-            ),
-          },
-          {
-            name: i18n.t('cancel'),
-            content: <Kbd>Esc</Kbd>,
-          },
-        ],
-      },
+      // {
+      //   label: i18n.t('plainPoint'),
+      //   key: 'point',
+      //   hotkeys: [
+      //     {
+      //       name: i18n.t('point'),
+      //       content: <MouseLeftClick />,
+      //     },
+      //     {
+      //       name: i18n.t('movePoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
+      //         </>
+      //       ),
+      //     },
+      //   ],
+      // },
+      // {
+      //   label: i18n.t('plainLine'),
+      //   key: 'line',
+      //   hotkeys: [
+      //     {
+      //       name: i18n.t('line'),
+      //       content: <MouseLeftClick />,
+      //     },
+      //     {
+      //       name: i18n.t('shiftLine'),
+      //       content: (
+      //         <>
+      //           <Kbd>Shift</Kbd> + <MouseLeftClick />
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('movePoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('insertPoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('edgePress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('deletePoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('pointPress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
+      //         </>
+      //       ),
+      //     },
+      //   ],
+      // },
+      // {
+      //   label: i18n.t('plainPolygon'),
+      //   key: 'polygon',
+      //   hotkeys: [
+      //     {
+      //       name: i18n.t('polygon'),
+      //       content: <MouseLeftClick />,
+      //     },
+      //     {
+      //       name: i18n.t('moveEdge'),
+      //       content: (
+      //         <>
+      //           {i18n.t('selectEdgeAndLongPress')} <MouseLeftClick /> {i18n.t('dragEdge')}
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('movePoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('insertPoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('edgePress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('deletePoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('pointPress')} <Kbd>Alt</Kbd>, {i18n.t('thenClick')} <MouseLeftClick />
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('cropOverlap'),
+      //       content: (
+      //         <>
+      //           <Kbd>Alt</Kbd> + <Kbd>X</Kbd>
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('cancel'),
+      //       content: <Kbd>Esc</Kbd>,
+      //     },
+      //   ],
+      // },
+      // {
+      //   label: i18n.t('cuboid'),
+      //   key: 'cuboid',
+      //   hotkeys: [
+      //     {
+      //       name: i18n.t('makeCuboid'),
+      //       content: <MouseLeftClick />,
+      //     },
+      //     {
+      //       name: i18n.t('moveEdge'),
+      //       content: (
+      //         <>
+      //           {i18n.t('selectEdgeAndLongPress')} <MouseLeftClick /> {i18n.t('dragEdge')}
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('movePoint'),
+      //       content: (
+      //         <>
+      //           {i18n.t('selectPointAndLongPress')} <MouseLeftClick /> {i18n.t('dragPoint')}
+      //         </>
+      //       ),
+      //     },
+      //     {
+      //       name: i18n.t('cancel'),
+      //       content: <Kbd>Esc</Kbd>,
+      //     },
+      //   ],
+      // },
     ],
   },
 ];
