@@ -221,7 +221,11 @@ export class Axis {
     this._startPanPoint = null;
     this._startMovePoint = null;
 
-    cursorManager?.default();
+    if (cursorManager?.enabled) {
+      cursorManager?.default();
+    } else {
+      cursorManager?.disable();
+    }
 
     if (!this.isMoved) {
       eventEmitter.emit(EInternalEvent.RightMouseUpWithoutAxisChange, e);

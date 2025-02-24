@@ -54,12 +54,13 @@ const presetSamples = [
 
 const defaultConfig = {
   backgroundColor: '#f3f5f8',
-  rect: {
-    minWidth: 1,
-    minHeight: 1,
-    outOfImage: false,
-    labels: [{ color: '#00ff1e', key: '标注框', value: '标注框' }],
-  },
+  // rect: {
+  //   minWidth: 1,
+  //   minHeight: 1,
+  //   outOfImage: false,
+  //   labels: [{ color: '#00ff1e', key: '标注框', value: '标注框' }],
+  // },
+
   // point: { maxPointAmount: 100, labels: [{ color: '#1899fb', key: '眼睛', value: 'eye' }] },
   // line: {
   //   lineType: 'line',

@@ -188,8 +188,10 @@ export class AnnotatorBase {
       Annotation.fillOpacity = config.fillOpacity;
     }
 
+    let notUsingTools = true;
     TOOL_NAMES.forEach((toolName) => {
       if (config[toolName]) {
+        notUsingTools = false;
         const ToolClass = ToolMapping[toolName];
         this.use(
           ToolClass.create({
@@ -200,6 +202,9 @@ export class AnnotatorBase {
         );
       }
     });
+    if (notUsingTools) {
+      this.cursorManager?.disable?.();
+    }
   }
 
   public use(instance: AnnotationTool) {
