@@ -9,7 +9,7 @@ import { ReactComponent as CRotateIcon } from './assets/c-rotate-icon.svg';
 import { useRotateHotkeys } from './useRotateHotkeys';
 
 const FooterBar = styled.div`
-  padding-bottom: 24px;
+  padding: 12px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ const FooterBar = styled.div`
 const Right = styled.div`
   padding: 12px 24px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.15);
+  /* background: rgba(0, 0, 0, 0.15); */
   display: flex;
   gap: 1rem;
 `;
@@ -53,11 +53,11 @@ export default function Footer() {
   return (
     <FooterBar style={{ backgroundColor: config?.backgroundColor || 'unset' }}>
       <Right>
-        <BarItem onClick={() => handleRotate(true)}>
-          <ARotateIcon className="labelu-svg-icon" />
-        </BarItem>
         <BarItem onClick={() => handleRotate(false)}>
           <CRotateIcon className="labelu-svg-icon" />
+        </BarItem>
+        <BarItem onClick={() => handleRotate(true)}>
+          <ARotateIcon className="labelu-svg-icon" />
         </BarItem>
         <BarItem onClick={() => engine.rotateAccording2Multiples(1.2)}>
           <AmplifyIcon />
