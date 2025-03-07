@@ -125,7 +125,11 @@ export class Axis {
   }
 
   private _handleKeyUp = () => {
-    cursorManager?.default();
+    if (cursorManager?.enabled) {
+      cursorManager?.default();
+    } else {
+      cursorManager?.disable();
+    }
   };
 
   private _handleMoveStart = (e: MouseEvent) => {

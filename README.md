@@ -20,6 +20,8 @@
    3. 侧边栏支持隐藏 hiddenSidebar (条件展示)
    4. 支持自定义渲染右侧面板的 footer 部分，并暴露 handleClear 方法 (attributePanelFooterRenderr)。
 6. 如果没有配置任何标注工具，则自动把默认的鼠标样式禁用，包括兼容拖动图片后的鼠标样式重置逻辑。
+   * 在 Axis 中鼠标拖动后 cursorManager 的初始化逻辑
+   * 在 Axis 中侦听 _handleKeyUp 事件，cursorManager 的初始化逻辑
 
 ### 个性化需求改动
 
