@@ -117,14 +117,14 @@ export default [
           </>
         ),
       },
-      {
-        name: i18n.t('editAttribute'),
-        content: (
-          <>
-            {os === 'MacOS' ? <Kbd>⇧</Kbd> : <Kbd>Shift</Kbd>} + <MouseRightClick />
-          </>
-        ),
-      },
+      // {
+      //   name: i18n.t('editAttribute'),
+      //   content: (
+      //     <>
+      //       {os === 'MacOS' ? <Kbd>⇧</Kbd> : <Kbd>Shift</Kbd>} + <MouseRightClick />
+      //     </>
+      //   ),
+      // },
       {
         name: i18n.t('prevLabel'),
         content: <Kbd>↑</Kbd>,
