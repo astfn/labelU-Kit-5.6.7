@@ -137,6 +137,31 @@ export default function ImagePage() {
         change sample
       </button>
       <ShortcutKeyOperationManualTooltip>
+        {/* <ShortcutKeyOperationManualTooltip
+        customItems={({ isMacOS, KbdCpn, MouseRightClickCpn }) => {
+          return [
+            {
+              label: '字段标注',
+              key: 'field annotation',
+              hotkeys: [
+                {
+                  name: '快捷键1',
+                  content:
+                    isMacOS === 'MacOS' ? (
+                      <>
+                        <KbdCpn>⌘</KbdCpn> + <KbdCpn>Z</KbdCpn>
+                      </>
+                    ) : (
+                      <>
+                        <KbdCpn>Ctrl</KbdCpn> + <KbdCpn>Z</KbdCpn> + <MouseRightClickCpn />
+                      </>
+                    ),
+                },
+              ],
+            },
+          ];
+        }}
+      > */}
         <b style={{ textAlign: 'center' }}>操作手册</b>
       </ShortcutKeyOperationManualTooltip>
       <ImageAnnotator

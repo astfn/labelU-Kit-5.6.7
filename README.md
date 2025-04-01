@@ -42,3 +42,4 @@
 
 1. 在 image-annotator-react 暴露 Annotator 类型(TImagePackageAnnotator)，方便外部获取 engine 类型
 2. image-annotator-react 暴露操作手册组件（ShortcutKeyOperationManual, ShortcutKeyOperationManualTooltip）
+   * 并支持在外部自定义配置快捷键内容

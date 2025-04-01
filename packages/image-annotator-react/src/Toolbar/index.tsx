@@ -1,4 +1,5 @@
-import { Toolbar, Tooltip, HotkeyPanel } from '@labelu/components-react';
+import { Toolbar, Tooltip, HotkeyPanel, Kbd, getOS } from '@labelu/components-react';
+import type { HotkeyPanelProps } from '@labelu/components-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import styled from 'styled-components';
 import { useTranslation } from '@labelu/i18n';
@@ -15,6 +16,8 @@ import { useAnnotationCtx } from '@/context/annotation.context';
 import { useHistoryCtx } from '@/context/history.context';
 import { dragModalRef } from '@/LabelSection';
 
+import { ReactComponent as MouseRightClick } from './assets/mouse-right.svg';
+import { ReactComponent as MouseLeftClick } from './assets/mouse-left.svg';
 import ToolStyle from './ToolStyle';
 import hotkeysConst from './hotkeys.const';
 
@@ -117,19 +120,49 @@ export function AnnotatorToolbar({ right, hidden }: IToolbarInEditorProps) {
   );
 }
 
-export function ShortcutKeyOperationManualTooltip(p: {
-  children: React.ReactElement;
-  placement?: string;
-  overlayStyle?: React.CSSProperties;
-}) {
-  const { children, placement = 'bottomLeft', overlayStyle = tooltipStyle } = p;
+export interface IShortcutKeyOperationManualProps {
+  customItems?: (p: {
+    isMacOS: boolean;
+    KbdCpn: typeof Kbd;
+    MouseRightClickCpn: typeof MouseRightClick;
+    MouseLeftClickCpn: typeof MouseLeftClick;
+  }) => HotkeyPanelProps['items'];
+}
+export function ShortcutKeyOperationManual(p: IShortcutKeyOperationManualProps) {
+  const { customItems } = p;
+  const os = getOS();
+  const isMacOS = os === 'MacOS';
   return (
-    <Tooltip overlayStyle={overlayStyle} overlay={<HotkeyPanel items={hotkeysConst} />} placement={placement}>
-      {children}
-    </Tooltip>
+    <HotkeyPanel
+      items={
+        customItems
+          ? customItems({
+              isMacOS,
+              KbdCpn: Kbd,
+              MouseRightClickCpn: MouseRightClick,
+              MouseLeftClickCpn: MouseLeftClick,
+            })
+          : hotkeysConst
+      }
+    />
   );
 }
 
-export function ShortcutKeyOperationManual() {
-  return <HotkeyPanel items={hotkeysConst} />;
+export function ShortcutKeyOperationManualTooltip(
+  p: {
+    children: React.ReactElement;
+    placement?: string;
+    overlayStyle?: React.CSSProperties;
+  } & IShortcutKeyOperationManualProps,
+) {
+  const { children, placement = 'bottomLeft', overlayStyle = tooltipStyle, customItems } = p;
+  return (
+    <Tooltip
+      overlayStyle={overlayStyle}
+      overlay={<ShortcutKeyOperationManual customItems={customItems} />}
+      placement={placement}
+    >
+      {children}
+    </Tooltip>
+  );
 }
