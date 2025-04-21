@@ -54,5 +54,20 @@ export function useRotateHotkeys(payload: IUseRotateHotkeysPayload) {
     [handleRotate, isAPressed],
   );
 
-  return { handleRotate };
+  /**
+   * 放大快捷键
+   */
+  const handleAmplify = useCallback(() => {
+    engine.rotateAccording2Multiples(1.2);
+  }, [engine]);
+  useHotkeys('alt+a', handleAmplify, { preventDefault: true }, [handleAmplify]);
+  /**
+   * 缩小快捷键
+   */
+  const handleReduce = useCallback(() => {
+    engine.rotateAccording2Multiples(0.8);
+  }, [engine]);
+  useHotkeys('alt+z', handleReduce, { preventDefault: true }, [handleReduce]);
+
+  return { handleRotate, handleAmplify, handleReduce };
 }

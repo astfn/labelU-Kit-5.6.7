@@ -85,6 +85,22 @@ export default [
     key: 'actions',
     hotkeys: [
       {
+        name: '放大',
+        content: (
+          <>
+            <Kbd>Alt</Kbd> + <Kbd>A</Kbd>
+          </>
+        ),
+      },
+      {
+        name: '缩小',
+        content: (
+          <>
+            <Kbd>Alt</Kbd> + <Kbd>Z</Kbd>
+          </>
+        ),
+      },
+      {
         name: '顺时针旋转',
         content: <Kbd>R</Kbd>,
       },

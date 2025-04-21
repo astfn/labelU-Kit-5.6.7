@@ -49,7 +49,7 @@ export default function Footer() {
   const { engine, config } = useTool();
   // @ts-ignore
 
-  const { handleRotate } = useRotateHotkeys({ engine });
+  const { handleRotate, handleAmplify, handleReduce } = useRotateHotkeys({ engine });
   return (
     <FooterBar style={{ backgroundColor: config?.backgroundColor || 'unset' }}>
       <Right>
@@ -59,10 +59,10 @@ export default function Footer() {
         <BarItem onClick={() => handleRotate(true)}>
           <ARotateIcon className="labelu-svg-icon" />
         </BarItem>
-        <BarItem onClick={() => engine.rotateAccording2Multiples(1.2)}>
+        <BarItem onClick={() => handleAmplify()}>
           <AmplifyIcon />
         </BarItem>
-        <BarItem onClick={() => engine.rotateAccording2Multiples(0.8)}>
+        <BarItem onClick={() => handleReduce()}>
           <ReduceIcon />
         </BarItem>
         {/* <BarItem
