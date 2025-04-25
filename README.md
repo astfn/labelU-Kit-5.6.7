@@ -11,7 +11,7 @@
    - useRotateHotkeys
 3. 拓展标注库实例方法，可以传入倍数进行缩放（实现 ui 交互的逐步放大/缩小功能）
    - rotateAccording2Multiples(multiple: number)
-   - 新增对应功能快捷键（放大 alt+a 缩小 alt+z）
+   - 新增对应功能快捷键（放大 alt+q 缩小 alt+z）
 4. 支持配置画布背景色，并联动底部工具栏样式
    - config.backgroundColor
 5. image-annotator-react  api 拓展

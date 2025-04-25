@@ -88,7 +88,7 @@ export default [
         name: '放大',
         content: (
           <>
-            <Kbd>Alt</Kbd> + <Kbd>A</Kbd>
+            <Kbd>Alt</Kbd> + <Kbd>Q</Kbd>
           </>
         ),
       },

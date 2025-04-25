@@ -60,7 +60,7 @@ export function useRotateHotkeys(payload: IUseRotateHotkeysPayload) {
   const handleAmplify = useCallback(() => {
     engine.rotateAccording2Multiples(1.2);
   }, [engine]);
-  useHotkeys('alt+a', handleAmplify, { preventDefault: true }, [handleAmplify]);
+  useHotkeys('alt+q', handleAmplify, { preventDefault: true }, [handleAmplify]);
   /**
    * 缩小快捷键
    */
