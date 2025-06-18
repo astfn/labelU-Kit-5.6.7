@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
 import { EllipsisText } from '@labelu/components-react';
-import type { AnnotationData, ToolName } from '@labelu/image';
+import type { AnnotationData, EditType, ToolName } from '@labelu/image';
 
 import { ReactComponent as EditIcon } from '@/assets/icons/edit.svg';
 import { ReactComponent as DeleteIcon } from '@/assets/icons/delete.svg';
@@ -152,6 +152,14 @@ export function AttributeAction({ annotation, annotations, showEdit = true }: At
     return true;
   }, [annotation, annotations]);
 
+  const getTargetActionIsEditable = (type: EditType) => {
+    return typeof requestEdit === 'function'
+      ? requestEdit(type, {
+          label: annotation?.label,
+          toolName: annotation?.tool as ToolName,
+        })
+      : true;
+  };
   const handleEditClick = (e: React.MouseEvent) => {
     engine.selectAnnotation(annotation!.tool, annotation!.id);
 
@@ -159,15 +167,7 @@ export function AttributeAction({ annotation, annotations, showEdit = true }: At
       return;
     }
 
-    const editable =
-      typeof requestEdit === 'function'
-        ? requestEdit('update', {
-            label: annotation!.label,
-            toolName: annotation!.tool,
-          })
-        : true;
-
-    if (!editable) {
+    if (!getTargetActionIsEditable('update')) {
       return;
     }
 
@@ -241,15 +241,17 @@ export function AttributeAction({ annotation, annotations, showEdit = true }: At
   if (annotation) {
     return (
       <Action>
-        {showEdit && <EditIcon onClick={handleEditClick} />}
+        {(showEdit ? getTargetActionIsEditable('update') : showEdit) && <EditIcon onClick={handleEditClick} />}
         {visible && <VisibilityIcon onClick={toggleOneVisibility(false)} />}
         {!visible && <StyledVisibilityOffIcon onClick={toggleOneVisibility(true)} />}
-        <DeleteIcon
-          onClick={() => {
-            engine?.removeAnnotationById(annotation.tool, annotation.id);
-            onAnnotationRemove(annotation);
-          }}
-        />
+        {getTargetActionIsEditable('delete') && (
+          <DeleteIcon
+            onClick={() => {
+              engine?.removeAnnotationById(annotation.tool, annotation.id);
+              onAnnotationRemove(annotation);
+            }}
+          />
+        )}
       </Action>
     );
   }
@@ -257,17 +259,19 @@ export function AttributeAction({ annotation, annotations, showEdit = true }: At
   // 一组标注
   return (
     <Action>
-      {showEdit && <EditIcon onClick={handleEditClick} />}
+      {(showEdit ? getTargetActionIsEditable('update') : showEdit) && <EditIcon onClick={handleEditClick} />}
       {visible && <VisibilityIcon onClick={toggleBatchVisibility(false)} />}
       {!visible && <StyledVisibilityOffIcon onClick={toggleBatchVisibility(true)} />}
-      <DeleteIcon
-        onClick={() => {
-          annotations?.forEach((item) => {
-            engine?.removeAnnotationById(item.tool, item.id);
-          });
-          onAnnotationsRemove(annotations!);
-        }}
-      />
+      {getTargetActionIsEditable('delete') && (
+        <DeleteIcon
+          onClick={() => {
+            annotations?.forEach((item) => {
+              engine?.removeAnnotationById(item.tool, item.id);
+            });
+            onAnnotationsRemove(annotations!);
+          }}
+        />
+      )}
     </Action>
   );
 }

@@ -252,6 +252,16 @@ export class Tool<Data extends BasicImageAnnotation, Style, Config extends Basic
     }
   }
 
+  /**
+   * 选中标注的前置逻辑
+   *  返回 true 将正常执行各个标注工具的 onSelect 方法
+   *  返回 false 则不执行
+   */
+  protected onBeforeAnnotationSelect(_annotationObj: IAnnotation<Data, Style>) {
+    if (!this.requestEdit('update')) return false;
+    return true;
+  }
+
   protected onAnnotationSelect(data: Data) {
     this.destroySketch();
     this.activate(data.label);

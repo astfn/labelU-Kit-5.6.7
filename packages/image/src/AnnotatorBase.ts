@@ -37,6 +37,10 @@ export interface AnnotatorOptions {
    * 画布背景色
    */
   backgroundColor?: string;
+  /**
+   * 禁用光标
+   */
+  disableCursor?: boolean;
 
   line?: LineToolOptions;
 
@@ -175,6 +179,7 @@ export class AnnotatorBase {
 
   private _initialTools() {
     const { config } = this;
+    const { disableCursor } = config;
 
     if (config.strokeWidth) {
       Annotation.strokeWidth = config.strokeWidth;
@@ -202,7 +207,7 @@ export class AnnotatorBase {
         );
       }
     });
-    if (notUsingTools) {
+    if (notUsingTools || disableCursor) {
       this.cursorManager?.disable?.();
     }
   }

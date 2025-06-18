@@ -123,6 +123,7 @@ export class PolygonTool extends Tool<PolygonData, PolygonStyle, PolygonToolOpti
    * 点击画布事件处理
    */
   protected onSelect = (annotation: AnnotationPolygon) => (_e: MouseEvent) => {
+    if (!this.onBeforeAnnotationSelect(annotation)) return;
     this.archiveDraft();
     this._createDraft(annotation.data);
     this.onAnnotationSelect(annotation.data);
