@@ -205,7 +205,9 @@ export function AttributePanel(props: IAttributePanelProps) {
   // @ts-ignore
   const { t } = useTranslation();
 
-  const { imageAnnotationsGroup, defaultActiveKeys } = useMemo(() => {
+  const [activeKeys, setActiveKeys] = useState<string[]>([]);
+
+  const { imageAnnotationsGroup } = useMemo(() => {
     const imageAnnotationsGroupByLabel = new Map<string, AnnotationDataInUI[]>();
 
     for (const item of sortedImageAnnotations) {
@@ -218,10 +220,12 @@ export function AttributePanel(props: IAttributePanelProps) {
       imageAnnotationsGroupByLabel?.get(label)?.push(item);
     }
 
+    const defaultActiveKeys = Array.from(imageAnnotationsGroupByLabel.keys());
+    if (!activeKeys.length) setActiveKeys(defaultActiveKeys);
     return {
       imageAnnotationsGroup: imageAnnotationsGroupByLabel,
-      defaultActiveKeys: Array.from(imageAnnotationsGroupByLabel.keys()),
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortedImageAnnotations]);
 
   const globals = useMemo(() => {
@@ -435,7 +439,13 @@ export function AttributePanel(props: IAttributePanelProps) {
       </TabHeader>
       <Content activeKey={activeKey}>
         <AttributeTree data={flatGlobalAnnotations} config={globals} onChange={handleOnChange} />
-        <CollapseWrapper defaultActiveKey={defaultActiveKeys} items={collapseItems} />
+        <CollapseWrapper
+          items={collapseItems}
+          activeKey={activeKeys}
+          onChange={(newActiveKeys: any[]) => {
+            setActiveKeys(newActiveKeys);
+          }}
+        />
       </Content>
       {footerRender ? footerRender?.({ handleClear }) : <ClearAction onClear={handleClear} />}
     </Wrapper>
