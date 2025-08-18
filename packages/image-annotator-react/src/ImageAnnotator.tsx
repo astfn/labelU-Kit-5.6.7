@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import type {
   Attribute,
   ILabel,
@@ -134,6 +134,11 @@ export interface ImageAnnotatorProps {
   renderSidebar?: null | (() => React.ReactNode);
   attributePanelFooterRender?: IAttributePanelProps['footerRender'];
   renderAttributes?: () => React.ReactNode;
+  customRenderContent?: (p: {
+    sidebar: React.ReactNode;
+    contentMid: React.ReactNode;
+    attributeSide: React.ReactNode;
+  }) => React.ReactNode;
   editingSample?: ImageSample;
 
   maxHistoryCount?: number;
@@ -176,6 +181,7 @@ function ForwardAnnotator(
     config,
     attributePanelFooterRender,
     renderAttributes,
+    customRenderContent,
     offsetTop = 0,
     editingSample,
     maxHistoryCount = 20,
@@ -934,6 +940,26 @@ function ForwardAnnotator(
     );
   }, [renderAttributes, attributePanelFooterRender]);
 
+  const renderContent = () => {
+    const sidebar = <Sidebar hidden={hiddenSidebar} renderSidebar={renderSidebar} />;
+    const contentMid = (
+      <ContentMid>
+        <AnnotationContainer ref={containerRef} />
+        <Footer />
+      </ContentMid>
+    );
+
+    return typeof customRenderContent === 'function' ? (
+      customRenderContent({ sidebar, contentMid, attributeSide })
+    ) : (
+      <>
+        {sidebar}
+        {contentMid}
+        {attributeSide}
+      </>
+    );
+  };
+
   return (
     <SampleContext.Provider value={sampleContextValue}>
       <AnnotationContext.Provider value={annotationContextValue}>
@@ -945,14 +971,7 @@ function ForwardAnnotator(
               <div style={{ display: hiddenToolbar ? 'none' : undefined }}>
                 <AnnotatorToolbar hidden={hiddenToolbar} extra={toolbarExtra} right={toolbarRight} />
               </div>
-              <Content>
-                <Sidebar hidden={hiddenSidebar} renderSidebar={renderSidebar} />
-                <ContentMid>
-                  <AnnotationContainer ref={containerRef} />
-                  <Footer />
-                </ContentMid>
-                {attributeSide}
-              </Content>
+              <Content>{renderContent()}</Content>
             </Wrapper>
           </HistoryContext.Provider>
         </ToolContext.Provider>
