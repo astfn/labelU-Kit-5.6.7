@@ -44,11 +44,19 @@
         }) => React.ReactNode;
       ```
 
-6. 如果没有配置任何标注工具，则自动把默认的鼠标样式禁用，包括兼容拖动图片后的鼠标样式重置逻辑。
+   6. 自定义渲染标注画布上方的头部区域（renderAnnotationCanvasHeader）
+
+      ```
+        renderAnnotationCanvasHeader?: () => React.ReactNode;
+      ```
+
+      位于 ContentMid 内部、标注画布的正上方，原先为 LabelSection 的位置。可用于注入标签选择器、辅助工具栏或任意自定义内容。
+
+7. 如果没有配置任何标注工具，则自动把默认的鼠标样式禁用，包括兼容拖动图片后的鼠标样式重置逻辑。
    * 在 Axis 中鼠标拖动后 cursorManager 的初始化逻辑
    * 在 Axis 中侦听 _handleKeyUp 事件，cursorManager 的初始化逻辑
    
-7. disabled 功能
+8. disabled 功能
 
    结合自带的 requestEdit 功能，与之前实现的鼠标样式禁用逻辑实现目标功能
 

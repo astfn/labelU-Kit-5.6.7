@@ -487,6 +487,13 @@ export default function ImagePage() {
         primaryColor={'#0d53de'}
         // hiddenToolbar
         hiddenSidebar
+        renderAnnotationCanvasHeader={() => {
+          return (
+            <div style={{ textAlign: 'center' }}>
+              <h2>标注画布上方区域渲染</h2>
+            </div>
+          );
+        }}
         attributePanelFooterRender={({ handleClear }) => (
           <>
             <button

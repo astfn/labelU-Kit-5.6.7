@@ -94,6 +94,7 @@ const ContentMid = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const AnnotationContainer = styled.div`
@@ -148,6 +149,8 @@ export interface ImageAnnotatorProps {
   toolbarExtra?: React.ReactNode;
   toolbarRight?: React.ReactNode;
 
+  renderAnnotationCanvasHeader?: () => React.ReactNode;
+
   onError?: (error: { type: string; message: string; value?: any }) => void;
 
   onLoad?: (engine: ImageAnnotatorClass) => void;
@@ -189,6 +192,7 @@ function ForwardAnnotator(
     hiddenToolbar = false,
     toolbarExtra: toolbarExtra,
     toolbarRight: toolbarRight,
+    renderAnnotationCanvasHeader,
     preAnnotationLabels,
     preAnnotations,
     requestEdit,
@@ -944,6 +948,7 @@ function ForwardAnnotator(
     const sidebar = <Sidebar hidden={hiddenSidebar} renderSidebar={renderSidebar} />;
     const contentMid = (
       <ContentMid>
+        {renderAnnotationCanvasHeader?.()}
         <AnnotationContainer ref={containerRef} />
         <Footer />
       </ContentMid>
